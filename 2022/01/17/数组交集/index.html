@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Archives | kingofacewang</title>
+  <title>数组交集 | kingofacewang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="kingofacewang">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="给定两个数组，编写一个函数来计算它们的交集。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数组交集">
+<meta property="og:url" content="http://example.com/2022/01/17/%E6%95%B0%E7%BB%84%E4%BA%A4%E9%9B%86/index.html">
 <meta property="og:site_name" content="kingofacewang">
+<meta property="og:description" content="给定两个数组，编写一个函数来计算它们的交集。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-17T14:51:33.000Z">
+<meta property="article:modified_time" content="2022-01-17T15:33:04.014Z">
 <meta property="article:author" content="king">
+<meta property="article:tag" content="ds java">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="kingofacewang" type="application/atom+xml">
@@ -146,36 +151,65 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-数组交集" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/17/%E6%95%B0%E7%BB%84%E4%BA%A4%E9%9B%86/" class="archive-article-date">
-  	<time datetime="2022-01-17T14:51:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-17</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/17/%E6%95%B0%E7%BB%84%E4%BA%A4%E9%9B%86/">数组交集</a>
+    <h1 class="article-title" itemprop="name">
+      数组交集
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2022/01/17/%E6%95%B0%E7%BB%84%E4%BA%A4%E9%9B%86/" class="archive-article-date">
+  	<time datetime="2022-01-17T14:51:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>给定两个数组，编写一个函数来计算它们的交集。</p>
+<span id="more"></span>
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><p>这是一道映射题，首先需要找到两个数组中相同的元素，并且相同元素出现次数一致，就可以用hashmap集合，将a数组中的元素以&lt;key,value&gt;的形式存入集合，其中key表示元素，value表示元素出现的次数，再将b数组中元素与集合中元素比较，每找到一个相同元素value减一，并且将相同元素存入新的数组中，最后返回新数组。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] intersect(<span class="keyword">int</span>[] a,<span class="keyword">int</span>[] b)&#123;</span><br><span class="line">        Map&lt;Integer,Integer&gt; map=<span class="keyword">new</span> HashMap();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> ele:a) &#123;</span><br><span class="line">            <span class="keyword">if</span>(map.containsKey(ele))&#123;</span><br><span class="line">                map.put(ele,map.get(ele)+<span class="number">1</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                map.put(ele,<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> index=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> length=a.length&lt;b.length?a.length:b.length;</span><br><span class="line">        <span class="keyword">int</span> arr[]=<span class="keyword">new</span> <span class="keyword">int</span>[length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> els:b) &#123;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(els)&amp;&amp;map.get(els)&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                arr[index]=els;</span><br><span class="line">                map.put(els,map.get(els)-<span class="number">1</span>);</span><br><span class="line">                index++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Arrays.copyOfRange(arr,<span class="number">0</span>,index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><strong>这里需要判断集合中该元素个数是否大于0，如果不添加将会导致集合value&lt;0,多输出相同元素的个数，导致交集出错。</strong></p>
+<p><strong>方法需要拷贝，否则后面会有0出现。</strong></p>
+<h1 id="提升"><a href="#提升" class="headerlink" title="提升"></a>提升</h1><p>给定的数组已经排好序，求两数组交集<br>使用两个指针，分别指向两个数组，从0开始向后比较，如果a数组元素的值大于b数组元素值，a数组指针向后移动；反之，b数组指针向后移动，如果两元素相等，则将值赋给新数组c，并且a、b、c三个数组指针均向后移动。</p>
+<h2 id="冒泡排序从大到小"><a href="#冒泡排序从大到小" class="headerlink" title="冒泡排序从大到小"></a>冒泡排序从大到小</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] a)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; a.length-i-<span class="number">1</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[j]&lt;a[j+<span class="number">1</span>])&#123;</span><br><span class="line">                tmp=a[j];</span><br><span class="line">                a[j]=a[j+<span class="number">1</span>];</span><br><span class="line">                a[j+<span class="number">1</span>]=tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="求交集"><a href="#求交集" class="headerlink" title="求交集"></a>求交集</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] intersect(<span class="keyword">int</span>[] a,<span class="keyword">int</span>[] b)&#123;</span><br><span class="line">    <span class="keyword">int</span> index1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> index2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> length=a.length&lt;b.length?a.length:b.length;</span><br><span class="line">    <span class="keyword">int</span> arr[]=<span class="keyword">new</span> <span class="keyword">int</span>[length];</span><br><span class="line">    <span class="keyword">while</span>(index1&lt;a.length&amp;&amp;index2&lt;b.length)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[index1]&gt;b[index2])&#123;</span><br><span class="line">            index1++;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a[index1]&lt;b[index2])&#123;</span><br><span class="line">            index2++;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            arr[index]=a[index1];</span><br><span class="line">            index++;</span><br><span class="line">            index1++;</span><br><span class="line">            index2++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Arrays.copyOfRange(arr,<span class="number">0</span>,index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：whiel结束的条件没有等号并且是&amp;&amp;运算，也可以不用创建新数组直接将相同元素存入遍历后的数组。</strong></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -187,57 +221,119 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2022/01/17/%E6%95%B0%E7%BB%84%E4%BA%A4%E9%9B%86/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2022/01/16/markdown%E8%AF%AD%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2022-01-16T09:32:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-16</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2022/01/16/markdown%E8%AF%AD%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">markdown语法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/16/markdown%E8%AF%AD%E6%B3%95/">markdown语法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">markdown</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">题目分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">2.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%90%E5%8D%87"><span class="toc-number">3.</span> <span class="toc-text">提升</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E4%BB%8E%E5%A4%A7%E5%88%B0%E5%B0%8F"><span class="toc-number">3.1.</span> <span class="toc-text">冒泡排序从大到小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E4%BA%A4%E9%9B%86"><span class="toc-number">3.2.</span> <span class="toc-text">求交集</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -264,8 +360,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
