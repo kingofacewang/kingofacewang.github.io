@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>数组交集 | kingofacewang</title>
+  <title>数组交集与Map | kingofacewang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="给定两个数组，编写一个函数来计算它们的交集。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数组交集">
+<meta property="og:title" content="数组交集与Map">
 <meta property="og:url" content="http://example.com/2022/01/17/%E6%95%B0%E7%BB%84%E4%BA%A4%E9%9B%86/index.html">
 <meta property="og:site_name" content="kingofacewang">
 <meta property="og:description" content="给定两个数组，编写一个函数来计算它们的交集。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-17T14:51:33.000Z">
-<meta property="article:modified_time" content="2022-01-17T15:33:04.014Z">
+<meta property="article:modified_time" content="2022-01-23T07:58:33.278Z">
 <meta property="article:author" content="king">
-<meta property="article:tag" content="ds java">
+<meta property="article:tag" content="ds java Map">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="kingofacewang" type="application/atom+xml">
@@ -48,7 +48,7 @@
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
-			<img src="/assets/1.png" class="js-avatar show" style="width: 100%;height: 100%;opacity: 1;">
+			<img src="/assets/2.png" class="js-avatar show" style="width: 100%;height: 100%;opacity: 1;">
 		</a>
 		<hgroup>
 		  <h1 class="header-author"><a href="/">king</a></h1>
@@ -104,7 +104,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img src="/assets/1.png" class="js-avatar">
+				<img src="/assets/2.png" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author js-header-author">king</h1>
@@ -158,7 +158,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      数组交集
+      数组交集与Map
     </h1>
   
 
@@ -181,6 +181,65 @@
 <h2 id="冒泡排序从大到小"><a href="#冒泡排序从大到小" class="headerlink" title="冒泡排序从大到小"></a>冒泡排序从大到小</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] a)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; a.length-i-<span class="number">1</span>; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(a[j]&lt;a[j+<span class="number">1</span>])&#123;</span><br><span class="line">                tmp=a[j];</span><br><span class="line">                a[j]=a[j+<span class="number">1</span>];</span><br><span class="line">                a[j+<span class="number">1</span>]=tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="求交集"><a href="#求交集" class="headerlink" title="求交集"></a>求交集</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] intersect(<span class="keyword">int</span>[] a,<span class="keyword">int</span>[] b)&#123;</span><br><span class="line">    <span class="keyword">int</span> index1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> index2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> length=a.length&lt;b.length?a.length:b.length;</span><br><span class="line">    <span class="keyword">int</span> arr[]=<span class="keyword">new</span> <span class="keyword">int</span>[length];</span><br><span class="line">    <span class="keyword">while</span>(index1&lt;a.length&amp;&amp;index2&lt;b.length)&#123;</span><br><span class="line">        <span class="keyword">if</span>(a[index1]&gt;b[index2])&#123;</span><br><span class="line">            index1++;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(a[index1]&lt;b[index2])&#123;</span><br><span class="line">            index2++;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            arr[index]=a[index1];</span><br><span class="line">            index++;</span><br><span class="line">            index1++;</span><br><span class="line">            index2++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Arrays.copyOfRange(arr,<span class="number">0</span>,index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>注意：whiel结束的条件没有等号并且是&amp;&amp;运算，也可以不用创建新数组直接将相同元素存入遍历后的数组。</strong></p>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>Map接口：双列集合，用来存储一对(key - value)一对的数据类似于y = f(x)</p>
+<ul>
+<li>Map中的key:无序的、不可重复的，使用Set存储所有的key  —&gt; key所在的类要重写equals()和hashCode() （以HashMap为例）</li>
+<li>Map中的value:无序的、可重复的，使用Collection存储所有的value —&gt;value所在的类要重写equals()</li>
+<li>一个键值对：key-value构成了一个Entry对象。</li>
+<li>Map中的entry:无序的、不可重复的，使用Set存储所有的entry<h2 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h2>作为Map的主要实现类；线程不安全的，效率高；存储null的key和value。</li>
+</ul>
+<p>HashMap判断两个key相等的标准是：两个key通过equals()方法返回true，hashCode值也相等。</p>
+<p>HashMap判断两个value相等的标准是：两个value 通过equals()方法返回true。</p>
+<h3 id="HashMap在JDK1-7中的底层实现原理"><a href="#HashMap在JDK1-7中的底层实现原理" class="headerlink" title="HashMap在JDK1.7中的底层实现原理"></a>HashMap在JDK1.7中的底层实现原理</h3><p>HashMap map = new HashMap():  </p>
+<p>在实例化以后，底层创建了长度是16的一维数组Entry[] table。  </p>
+<p>map.put(key1,value1)；  </p>
+<p>首先，调用key1所在类的hashCode()计算key1哈希值，此哈希值经过某种算法计算以后得到在Entry数组中的存放位置。  </p>
+<p>如果此位置上的数据为空，此时的key1-value1添加成功。 </p>
+<p>如果此位置上的数据不为空，(意味着此位置上存在一个或多个数据(以链表形式存在)),比较key1和已经存在的一个或多个数据的哈希值：</p>
+<ul>
+<li>如果key1的哈希值与已经存在的数据的哈希值都不相同，此时key1-value1添加成功。</li>
+<li>如果key1的哈希值和已经存在的某一个数据(key2-value2)的哈希值相同，继续比较：调用key1所在类的equals(key2)方法，比较：<ul>
+<li>如果equals()返回false:此时key1-value1添加成功。</li>
+<li>如果equals()返回true:使用value1替换value2。<h3 id="红黑树的性质"><a href="#红黑树的性质" class="headerlink" title="红黑树的性质"></a>红黑树的性质</h3>红黑树是每个节点都带有颜色属性的二叉查找树，颜色或红色或黑色。在二叉查找树强制一般要求以外，对于任何有效的红黑树我们增加了如下的额外要求:</li>
+</ul>
+</li>
+</ul>
+<p>性质1. 节点是红色或黑色。</p>
+<p>性质2. 根节点是黑色。</p>
+<p>性质3 每个叶节点（NIL节点，空节点）是黑色的。</p>
+<p>性质4 每个红色节点的两个子节点都是黑色。(从每个叶子到根的所有路径上不能有两个连续的红色节点)</p>
+<p>性质5. 从任一节点到其每个叶子的所有路径都包含相同数目的黑色节点。</p>
+<h3 id="HashMap在JDK1-8中的底层实现原理的不同"><a href="#HashMap在JDK1-8中的底层实现原理的不同" class="headerlink" title="HashMap在JDK1.8中的底层实现原理的不同"></a>HashMap在JDK1.8中的底层实现原理的不同</h3><ol>
+<li>new HashMap():底层没有创建一个长度为16的数组</li>
+<li>jdk1.8底层的数组是：Node[]，而非Entry[]</li>
+<li>首次调用put()方法时，底层创建长度为16的数组</li>
+<li>jdk7底层结构只有：数组+链表。jdk8中底层结构：数组+链表+红黑树<ol>
+<li>形成链表时，七上八下（jdk1.7:新的元素指向旧的元素。jdk1.8：旧的元素指向新的元素）</li>
+<li>当数组的某一个索引位置上的元素以链表形式存在的数据个数 &gt; 8 且当前数组的长度 &gt; 64时，此时此索引位置上的所数据改为使用红黑树存储。<br>HashMap中的红黑树节点采用的是TreeNode类。TreeNode和Entry都是Node的子类，也就说Node可能是链表结构，也可能是红黑树结构。</li>
+</ol>
+</li>
+</ol>
+<p>如果插入的key的hashcode相同，那么这些key也会被定位到Node数组的同一个格子里。如果同一个格子里的key不超过8个，使用链表结构存储。如果超过了8个，那么会调用treeifyBin函数，将链表转换为红黑树。</p>
+<h3 id="LinkedHashMap"><a href="#LinkedHashMap" class="headerlink" title="LinkedHashMap"></a>LinkedHashMap</h3><p>保证在遍历map元素时，可以按照添加的顺序实现遍历。</p>
+<p>原因：在原有的HashMap底层结构基础上，添加了一对指针，指向前一个和后一个元素。对于频繁的遍历操作，此类执行效率高于HashMap。</p>
+<h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><p>保证按照添加的key-value对进行排序，实现排序遍历。此时考虑key的自然排序或定制排序底层使用红黑树</p>
+<h2 id="Hashtable"><a href="#Hashtable" class="headerlink" title="Hashtable"></a>Hashtable</h2><p>作为古老的实现类；线程安全的，效率低；不能存储null的key和value。</p>
+<h3 id="Properties"><a href="#Properties" class="headerlink" title="Properties"></a>Properties</h3><p>常用来处理配置文件。key和value都是String类型</p>
+<h2 id="Map中常用方法"><a href="#Map中常用方法" class="headerlink" title="Map中常用方法"></a>Map中常用方法</h2><ul>
+<li>添加：put(Object key,Object value)</li>
+<li>删除：remove(Object key)</li>
+<li>修改：put(Object key,Object value)</li>
+<li>查询：get(Object key)</li>
+<li>长度：size()</li>
+<li>遍历：keySet() / values() / entrySet()<h2 id="HashMap和Hashtable的异同"><a href="#HashMap和Hashtable的异同" class="headerlink" title="HashMap和Hashtable的异同"></a>HashMap和Hashtable的异同</h2></li>
+</ul>
+<ol>
+<li>HashMap与Hashtable都实现了Map接口。由于HashMap的非线程安全性，效率上可能高于Hashtable。Hashtable的方法是Synchronize的，而HashMap不是，在多个线程访问Hashtable时，不需要自己为它的方法实现同步，而HashMap 就必须为之提供外同步。</li>
+<li>HashMap允许将null作为一个entry的key或者value，而Hashtable不允许。</li>
+<li>HashMap把Hashtable的contains方法去掉了，改成containsvalue和containsKey。因为contains方法容易让人引起误解。</li>
+<li>Hashtable继承自Dictionary类，而HashMap是Java1.2引进的Map interface的一个实现。</li>
+<li>Hashtable和HashMap采用的hash/rehash算法都大概一样，所以性能不会有很大的差异。</li>
+</ol>
 
       
 
@@ -215,7 +274,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">ds java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">ds java Map</a>
         		</li>
       		
 		</ul>
@@ -314,7 +373,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">题目分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">2.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%90%E5%8D%87"><span class="toc-number">3.</span> <span class="toc-text">提升</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E4%BB%8E%E5%A4%A7%E5%88%B0%E5%B0%8F"><span class="toc-number">3.1.</span> <span class="toc-text">冒泡排序从大到小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E4%BA%A4%E9%9B%86"><span class="toc-number">3.2.</span> <span class="toc-text">求交集</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">题目分析</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81"><span class="toc-number">2.</span> <span class="toc-text">代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F"><span class="toc-number">2.1.</span> <span class="toc-text">注意</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%90%E5%8D%87"><span class="toc-number">3.</span> <span class="toc-text">提升</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E4%BB%8E%E5%A4%A7%E5%88%B0%E5%B0%8F"><span class="toc-number">3.1.</span> <span class="toc-text">冒泡排序从大到小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B1%82%E4%BA%A4%E9%9B%86"><span class="toc-number">3.2.</span> <span class="toc-text">求交集</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Map"><span class="toc-number">4.</span> <span class="toc-text">Map</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap"><span class="toc-number">4.1.</span> <span class="toc-text">HashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap%E5%9C%A8JDK1-7%E4%B8%AD%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">4.1.1.</span> <span class="toc-text">HashMap在JDK1.7中的底层实现原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%A2%E9%BB%91%E6%A0%91%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">4.1.2.</span> <span class="toc-text">红黑树的性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HashMap%E5%9C%A8JDK1-8%E4%B8%AD%E7%9A%84%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86%E7%9A%84%E4%B8%8D%E5%90%8C"><span class="toc-number">4.1.3.</span> <span class="toc-text">HashMap在JDK1.8中的底层实现原理的不同</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LinkedHashMap"><span class="toc-number">4.1.4.</span> <span class="toc-text">LinkedHashMap</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TreeMap"><span class="toc-number">4.2.</span> <span class="toc-text">TreeMap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hashtable"><span class="toc-number">4.3.</span> <span class="toc-text">Hashtable</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Properties"><span class="toc-number">4.3.1.</span> <span class="toc-text">Properties</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map%E4%B8%AD%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">4.4.</span> <span class="toc-text">Map中常用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HashMap%E5%92%8CHashtable%E7%9A%84%E5%BC%82%E5%90%8C"><span class="toc-number">4.5.</span> <span class="toc-text">HashMap和Hashtable的异同</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -430,11 +489,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">ds java</a>
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+                <a href="javascript:void(0)" class="js-tag color2">ds java Map</a>
               </li>
             
             <div class="clearfix"></div>
